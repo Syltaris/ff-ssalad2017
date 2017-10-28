@@ -6,26 +6,86 @@ import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
 
 const FRONT_COLOUR = "#FFE8D8";
-const ACCENT_COLOUR = "#FFBAC0";
+const ACCENT_COLOUR = "#DB2981";
 const FONT_TO_USE = Platform.OS == 'ios' ? "Helvetica" : "sans-serif-condensed";
+const LOGO_URI = './res/img/fflogo.png';
 
-const countries = [{
-    name: <Text style={{float: 'center'}}>Japan</Text>,
-    icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
-  },
-  {
-    name: <Text style={{float: 'center'}}>USA</Text>,
-    icon: <Image source={require("./res/img/USA.png")} style={{width: 100, height: 75}} />
-  },
-  {
-    name: <Text style={{float: 'center'}}>Korea</Text>,
-    icon: <Image source={require("./res/img/KOREA.png")} style={{width: 100, height: 75}} />
-  },
+const mainMenu_headers = [{
+  header: '运动',
+  data: [{
+      text: <Text style={{float: 'center'}}>沙滩</Text>,
+      icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+    },{
+      text: <Text style={{float: 'center'}}>游泳</Text>,
+      icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+    },{
+      text: <Text style={{float: 'center'}}>健身</Text>,
+      icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+    },{
+      text: <Text style={{float: 'center'}}>防水</Text>,
+      icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+    },
+    ]
+  }, {
+    header: '异国',
+    data: [{
+        text: <Text style={{float: 'center'}}>日式</Text>,
+        icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+      },
+      {
+        text: <Text style={{float: 'center'}}>美式</Text>,
+        icon: <Image source={require("./res/img/USA.png")} style={{width: 100, height: 75}} />
+      },
+      {
+        text: <Text style={{float: 'center'}}>韩式</Text>,
+        icon: <Image source={require("./res/img/KOREA.png")} style={{width: 100, height: 75}} />
+      },
+    ]
+  },  {
+    header: '四季',
+    data: [{
+        text: <Text style={{float: 'center'}}>春</Text>,
+        icon: <Image source={require("./res/img/spring.jpeg")} style={{width: 100, height: 75}} />
+      },{
+          text: <Text style={{float: 'center'}}>夏</Text>,
+          icon: <Image source={require("./res/img/summer.jpeg")} style={{width: 100, height: 75}} />
+      },{
+          text: <Text style={{float: 'center'}}>秋</Text>,
+          icon: <Image source={require("./res/img/autumn.jpeg")} style={{width: 100, height: 75}} />
+      },{
+          text: <Text style={{float: 'center'}}>冬</Text>,
+          icon: <Image source={require("./res/img/winter.jpeg")} style={{width: 100, height: 75}} />
+      },
+    ]
+  }, {
+    header: '艺人方庄',
+    data: [{
+        text: <Text style={{float: 'center'}}>王霏霏</Text>,
+        icon: <Image source={require("./res/img/wff.jpeg")} style={{width: 100, height: 75}} />
+    },{
+        text: <Text style={{float: 'center'}}>AngelaBaby</Text>,
+        icon: <Image source={require("./res/img/abb.jpeg")} style={{width: 100, height: 75}} />
+    },{
+        text: <Text style={{float: 'center'}}>凯莉詹娜</Text>,
+        icon: <Image source={require("./res/img/kj.jpeg")} style={{width: 100, height: 75}} />
+    },{
+        text: <Text style={{float: 'center'}}>泰勒·斯威夫特</Text>,
+        icon: <Image source={require("./res/img/ts.jpeg")} style={{width: 100, height: 75}} />
+    },]
+  }, {
+    header: '简单',
+    data: []
+  }, {
+    header: '优雅',
+    data: []
+  }, {
+    header: '正式',
+    data: []
+  },{
+    header: '特别节目',
+    data: []
+  }
 ];
-const data_countries = Array.from(countries).map((eachCountry) => ({
-  icon: eachCountry.icon,
-  text: eachCountry.name,
-}));
 
 const styles = StyleSheet.create({
   container: {
@@ -38,11 +98,11 @@ const styles = StyleSheet.create({
 
 const LoginScreen =({ navigation }) => (
   <View flex={1} style={{alignItems: 'center', backgroundColor: FRONT_COLOUR}}>
-    <Image source={require('./res/img/logo.jpeg')} style={{width: 250, height: 250, marginTop: 100}} />
-    <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>F*** F***</Text>
+    <Image source={require('./res/img/fflogo.png')} style={{width: 130, height: 250, marginTop: 100}} />
+    <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>要化妆就要追求完美无瑕</Text>
     <Text style={{fontSize: 50}}> </Text>
 
-    <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>REGISTER</Button>
+    <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
   </View>
 );
 
@@ -75,34 +135,32 @@ class RegistrationForm extends React.Component {
         <View style={{alignItems: 'center'}}>
           <TouchableHighlight
             onPress={this.openCamera.bind(this)}
-            style={{ width: 200, height: 200, borderRadius: Platform.OS == 'ios' ? 100 :  200,
+            style={{ width: 200, height: 200, borderRadius: Platform.OS == 'ios' ? 94 :  200,
               alignItems: 'center', justifyContent: 'center', backgroundColor: ACCENT_COLOUR }}>
             <Image
-              style={{ width: '95%', height: '95%', borderRadius: Platform.OS == 'ios' ? 100 :  200 }}
+              style={{ width: '95%', height: '95%', borderRadius: Platform.OS == 'ios' ? 92 :  200 }}
               source={require('./res/img/profile_default.jpg')}/>
           </TouchableHighlight>
         </View>
         <WhiteSpace/>
-        <List renderHeader={() => 'Your Profile'}>
+        <List renderHeader={() => '个人资料'}>
           <InputItem
             clear
-            placeholder="Jane Doe">
-            Name
+            value="啊脸"
+            placeholder="名字">
+            姓名
           </InputItem>
           <InputItem
             clear
-            placeholder="23">
-            Age
+            value="23"
+            placeholder="你几岁？">
+            岁数
           </InputItem>
           <InputItem
             clear
+            value="F"
             placeholder="F">
-            Sex
-          </InputItem>
-          <InputItem
-            clear
-            placeholder="Shanghai">
-            Location
+            性别
           </InputItem>
         </List>
         <WhiteSpace/>
@@ -118,70 +176,39 @@ const RegisterScreen = ({ navigation }) => (
   </View>
 );
 
+const GenerateCategoryList = () => {
+  return mainMenu_headers.map((category) => (
+    <View>
+      <View>
+        <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>{category.header}</Text>
+      </View>
+      <View>
+        <Grid data={category.data}
+          isCarousel
+          hasLine = 'false'
+          columnNum='3'
+          carouselMaxRow = '1'/>
+      </View>
+    </View>
+  ))
+};
 
 const HomeScreen = ({ navigation }) => (
   <View style={{height: '100%'}}>
-    <View flex={1}
-      style={{backgroundColor: ACCENT_COLOUR, alignItems: 'center', justifyContent: 'center'}}>
-      <Image
-        source={require('./res/img/logo.jpeg')}
-        style={{ height: 45, width: 45}}></Image>
-    </View>
     <View flex={12}>
       <ReactNative.ScrollView>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
-        </View>
-        <View>
-          <Grid data={data_countries} isCarousel/>
-        </View>
+        <GenerateCategoryList />
       </ReactNative.ScrollView>
     </View>
     <Button title="REGISTER" onClick={() => navigation.navigate('Login')}>BACK</Button>
   </View>
 );
+
+const DetailsScreen = ({ navigation }) => (
+  <View>
+    <Text>Details</Text>
+  </View>
+)
 
 const submitProfile = () => {
   Alert.alert('Submitted profile!');
@@ -191,7 +218,9 @@ const RootNavigator = StackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      header: null
+      headerTitle: '风格',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
   },
   Login: {
@@ -208,6 +237,11 @@ const RootNavigator = StackNavigator({
     //     onKeyPress={(submitProfile)}/>)
     // }
   },
+
+
+  Details: {
+    screen: DetailsScreen,
+  }
 
 });
 
