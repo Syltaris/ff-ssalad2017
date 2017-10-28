@@ -37,31 +37,31 @@ const mainMenu_headers = [{
     header: '异国',
     data: [{
         text: <Text style={{float: 'center'}}>日式</Text>,
-        icon: <Image source={require("./res/img/JAPAN.png")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+        icon: <Image source={require("./res/img/japanmakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },
       {
         text: <Text style={{float: 'center'}}>美式</Text>,
-        icon: <Image source={require("./res/img/USA.png")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+        icon: <Image source={require("./res/img/americanmakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },
       {
         text: <Text style={{float: 'center'}}>韩式</Text>,
-        icon: <Image source={require("./res/img/KOREA.png")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+        icon: <Image source={require("./res/img/koreanmakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },
     ]
   },  {
     header: '四季',
     data: [{
         text: <Text style={{float: 'center'}}>春</Text>,
-        icon: <Image source={require("./res/img/spring.jpeg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+        icon: <Image source={require("./res/img/springmakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },{
           text: <Text style={{float: 'center'}}>夏</Text>,
-          icon: <Image source={require("./res/img/summer.jpeg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+          icon: <Image source={require("./res/img/summermakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },{
           text: <Text style={{float: 'center'}}>秋</Text>,
-          icon: <Image source={require("./res/img/autumn.jpeg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+          icon: <Image source={require("./res/img/autumnmakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },{
           text: <Text style={{float: 'center'}}>冬</Text>,
-          icon: <Image source={require("./res/img/winter.jpeg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
+          icon: <Image source={require("./res/img/wintermakeup.jpg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
       },
     ]
   }, {
@@ -310,7 +310,57 @@ const HomeScreen = ({ navigation }) => (
 
 const DetailsScreen = ({ navigation }) => (
   <View>
-    <Text>Details</Text>
+    <View >
+      <ReactNative.ScrollView style={{height: '93.4%'}}>
+        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
+          <Image source={require("./res/img/koreanmakeup.jpg")}
+        style={{width: 300, height: 300, borderRadius: Platform.OS == 'ios' ? 150 : 300}}/>
+        </View>
+        <View>
+          <Text style={{fontSize: 60, fontFamily: FONT_TO_USE, marginLeft: 20}}>Ulzzang </Text>
+        </View>
+        <View>
+          <Text style={{fontSize: 20, fontFamily: FONT_TO_USE, marginLeft: 20}}>使用产品：</Text>
+          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+            1. innisfree olive real skin (emulsion type toner)
+          </Text>
+          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+            2. dr jart + detox healing black label bb create
+          </Text>
+          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+            3. sonia kashuk hidden agenda concealer 07
+          </Text>
+        </View>
+      </ReactNative.ScrollView>
+    </View>
+
+      <Flex
+        style={{height: 40, width: '100%', backgroundColor: ACCENT_COLOUR}}>
+        <Flex.Item flex={1.5}
+            flexDirection='horizontal'
+            style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight>
+            <Image
+              source={require('./res/icons/heart.png')}
+              style={{width:30, height: 30, margin: 5}}/>
+          </TouchableHighlight>
+        </Flex.Item>
+        <Flex.Item flex={5}
+            flexDirection='horizontal'
+            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight>
+            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>加入购物车</Text>
+          </TouchableHighlight>
+        </Flex.Item>
+        <Flex.Item flex={5}
+            flexDirection='horizontal'
+            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight onPress={() => navigation.navigate('Register')}>
+            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>立即购买</Text>
+          </TouchableHighlight>
+        </Flex.Item>
+      </Flex>
+
   </View>
 )
 
