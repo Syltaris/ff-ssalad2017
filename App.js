@@ -174,18 +174,18 @@ class RegistrationForm extends React.Component {
 
     return (
       <View >
-        <WhiteSpace/>
-        <View style={{alignItems: 'center'}}>
+        <View style={{alignItems: 'center', margin: 40}}>
           <TouchableHighlight
             onPress={this.openCamera.bind(this)}
-            style={{ width: 200, height: 200, borderRadius: Platform.OS == 'ios' ? 94 :  200,
-              alignItems: 'center', justifyContent: 'center', backgroundColor: ACCENT_COLOUR }}>
+            style={{ width: 250, height: 250 }}>
             <Image
-              style={{ width: '95%', height: '95%', borderRadius: Platform.OS == 'ios' ? 92 :  200 }}
+              style={{ width: '95%', height: '95%',
+              borderWidth:5,
+              borderColor: ACCENT_COLOUR,
+              borderRadius: Platform.OS == 'ios' ? 120 :  250 }}
               source={require('./res/img/profile_default.jpg')}/>
           </TouchableHighlight>
         </View>
-        <WhiteSpace/>
         <List renderHeader={() => '个人资料'}>
           <InputItem
             clear
@@ -271,30 +271,38 @@ const HomeScreen = ({ navigation }) => (
       <Flex.Item flex={1}
           flexDirection='horizontal'
           style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <Image
-          source={require('./res/icons/guides.png')}
-          style={{width:30, height: 30, margin: 5}}/>
+        <TouchableHighlight>
+          <Image
+            source={require('./res/icons/guides.png')}
+            style={{width:30, height: 30, margin: 5}}/>
+        </TouchableHighlight>
       </Flex.Item>
       <Flex.Item flex={1}
           flexDirection='horizontal'
           style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <Image
-          source={require('./res/icons/orders.png')}
-          style={{width:30, height: 30, margin: 5}}/>
+        <TouchableHighlight>
+          <Image
+            source={require('./res/icons/orders.png')}
+            style={{width:30, height: 30, margin: 5}}/>
+        </TouchableHighlight>
       </Flex.Item>
       <Flex.Item flex={1}
           flexDirection='horizontal'
           style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <Image
-          source={require('./res/icons/camera.png')}
-          style={{width:30, height: 30, margin: 5}}/>
+        <TouchableHighlight>
+          <Image
+            source={require('./res/icons/camera.png')}
+            style={{width:30, height: 30, margin: 5}}/>
+        </TouchableHighlight>
       </Flex.Item>
       <Flex.Item flex={1}
           flexDirection='horizontal'
           style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <Image
-          source={require('./res/icons/profile.png')}
-          style={{width:30, height: 30, margin: 5}}/>
+        <TouchableHighlight onPress={() => navigation.navigate('Register')}>
+          <Image
+            source={require('./res/icons/profile.png')}
+            style={{width:30, height: 30, margin: 5}}/>
+        </TouchableHighlight>
       </Flex.Item>
     </Flex>
   </View>
