@@ -1,12 +1,31 @@
 import React from 'react';
-import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight  } from 'react-native';
-import { Button, List, InputItem, WhiteSpace, ImagePicker } from 'antd-mobile';
+import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform  } from 'react-native';
+import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
 
 const FRONT_COLOUR = "#FFE8D8";
 const ACCENT_COLOUR = "#FFBAC0";
+const FONT_TO_USE = Platform.OS == 'ios' ? "Helvetica" : "sans-serif-condensed";
+
+const countries = [{
+    name: <Text style={{float: 'center'}}>Japan</Text>,
+    icon: <Image source={require("./res/img/JAPAN.png")} style={{width: 100, height: 75}} />
+  },
+  {
+    name: <Text style={{float: 'center'}}>USA</Text>,
+    icon: <Image source={require("./res/img/USA.png")} style={{width: 100, height: 75}} />
+  },
+  {
+    name: <Text style={{float: 'center'}}>Korea</Text>,
+    icon: <Image source={require("./res/img/KOREA.png")} style={{width: 100, height: 75}} />
+  },
+];
+const data_countries = Array.from(countries).map((eachCountry) => ({
+  icon: eachCountry.icon,
+  text: eachCountry.name,
+}));
 
 const styles = StyleSheet.create({
   container: {
@@ -19,8 +38,8 @@ const styles = StyleSheet.create({
 
 const LoginScreen =({ navigation }) => (
   <View flex={1} style={{alignItems: 'center', backgroundColor: FRONT_COLOUR}}>
-    <Image source={require('./logo.png')} style={{width: 250, height: 250, marginTop: 100}} />
-    <Text style={{fontSize: 50, fontFamily: 'sans-serif-condensed'}}>F*** F***</Text>
+    <Image source={require('./res/img/logo.jpeg')} style={{width: 250, height: 250, marginTop: 100}} />
+    <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>F*** F***</Text>
     <Text style={{fontSize: 50}}> </Text>
 
     <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>REGISTER</Button>
@@ -56,10 +75,10 @@ class RegistrationForm extends React.Component {
         <View style={{alignItems: 'center'}}>
           <TouchableHighlight
             onPress={this.openCamera.bind(this)}
-            style={{ width: 200, height: 200, borderRadius: 200,
+            style={{ width: 200, height: 200, borderRadius: Platform.OS == 'ios' ? 100 :  200,
               alignItems: 'center', justifyContent: 'center', backgroundColor: ACCENT_COLOUR }}>
             <Image
-              style={{ width: '95%', height: '95%', borderRadius: 200 }}
+              style={{ width: '95%', height: '95%', borderRadius: Platform.OS == 'ios' ? 100 :  200 }}
               source={require('./res/img/profile_default.jpg')}/>
           </TouchableHighlight>
         </View>
@@ -99,6 +118,7 @@ const RegisterScreen = ({ navigation }) => (
   </View>
 );
 
+
 const HomeScreen = ({ navigation }) => (
   <View style={{height: '100%'}}>
     <View flex={1}
@@ -107,7 +127,58 @@ const HomeScreen = ({ navigation }) => (
         source={require('./res/img/logo.jpeg')}
         style={{ height: 45, width: 45}}></Image>
     </View>
-    <View flex={12}><Text>OK</Text></View>
+    <View flex={12}>
+      <ReactNative.ScrollView>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{fontFamily:FONT_TO_USE, fontSize: 16, padding: 5}}>Styles</Text>
+        </View>
+        <View>
+          <Grid data={data_countries} isCarousel/>
+        </View>
+      </ReactNative.ScrollView>
+    </View>
     <Button title="REGISTER" onClick={() => navigation.navigate('Login')}>BACK</Button>
   </View>
 );
@@ -117,6 +188,12 @@ const submitProfile = () => {
 }
 
 const RootNavigator = StackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {
+      header: null
+    }
+  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -131,12 +208,7 @@ const RootNavigator = StackNavigator({
     //     onKeyPress={(submitProfile)}/>)
     // }
   },
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      header: null
-    }
-  },
+
 });
 
 export default RootNavigator;
