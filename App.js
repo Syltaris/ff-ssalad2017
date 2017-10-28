@@ -311,7 +311,7 @@ const HomeScreen = ({ navigation }) => (
 const DetailsScreen = ({ navigation }) => (
   <View>
     <View >
-      <ReactNative.ScrollView style={{height: '93.4%'}}>
+      <ReactNative.ScrollView style={{height: 515}}>
         <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
           <Image source={require("./res/img/koreanmakeup.jpg")}
         style={{width: 300, height: 300, borderRadius: Platform.OS == 'ios' ? 150 : 300}}/>
@@ -333,33 +333,53 @@ const DetailsScreen = ({ navigation }) => (
         </View>
       </ReactNative.ScrollView>
     </View>
-
-      <Flex
-        style={{height: 40, width: '100%', backgroundColor: ACCENT_COLOUR}}>
-        <Flex.Item flex={1.5}
-            flexDirection='horizontal'
-            style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-          <TouchableHighlight>
-            <Image
-              source={require('./res/icons/heart.png')}
-              style={{width:30, height: 30, margin: 5}}/>
-          </TouchableHighlight>
-        </Flex.Item>
-        <Flex.Item flex={5}
-            flexDirection='horizontal'
-            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-          <TouchableHighlight>
-            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>加入购物车</Text>
-          </TouchableHighlight>
-        </Flex.Item>
-        <Flex.Item flex={5}
-            flexDirection='horizontal'
-            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-          <TouchableHighlight onPress={() => navigation.navigate('Register')}>
-            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>立即购买</Text>
-          </TouchableHighlight>
-        </Flex.Item>
+    <View style={{width: '100%'}}>
+      <Text style={{fontSize: 20,
+        color: ACCENT_COLOUR,
+        marginLeft: 20,
+        borderRadius: Platform.OS == 'ios' ? 2 : 5}}>
+         评价: </Text>
+      <Flex style={{marginLeft: 15}}>
+        <View style={{height: 20, width: 20, margin: 5,
+          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+        <View style={{height: 20, width: 20, margin: 5,
+          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+        <View style={{height: 20, width: 20, margin: 5,
+          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+        <View style={{height: 20, width: 20, margin: 5,
+          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+        <View style={{height: 20, width: 20, margin: 5,
+          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+        <Text style={{fontSize: 20}}>4.9</Text>
       </Flex>
+
+    </View>
+    <Flex
+      style={{height: 40, width: '100%', backgroundColor: ACCENT_COLOUR}}>
+      <Flex.Item flex={1.5}
+          flexDirection='horizontal'
+          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+        <TouchableHighlight>
+          <Image
+            source={require('./res/icons/heart.png')}
+            style={{width:30, height: 30, margin: 5}}/>
+        </TouchableHighlight>
+      </Flex.Item>
+      <Flex.Item flex={5}
+          flexDirection='horizontal'
+          style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+        <TouchableHighlight>
+          <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>加入购物车</Text>
+        </TouchableHighlight>
+      </Flex.Item>
+      <Flex.Item flex={5}
+          flexDirection='horizontal'
+          style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+        <TouchableHighlight onPress={() => navigation.navigate('Register')}>
+          <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>立即购买</Text>
+        </TouchableHighlight>
+      </Flex.Item>
+    </Flex>
 
   </View>
 )
