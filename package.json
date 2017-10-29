@@ -30,6 +30,7 @@
     "react-native-camera-kit": "^5.3.11",
     "react-native-elements": "^0.17.0",
     "react-native-material-kit": "^0.4.1",
+    "react-native-pdf": "^2.0.1",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.15",
     "react-redux": "^5.0.6",

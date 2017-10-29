@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform  } from 'react-native';
-import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView, Icon, Flex } from 'antd-mobile';
+import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView, Icon, Flex, Modal, Checkbox, Toast } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
 const LoginScreen =({ navigation }) => (
   <View flex={1} style={{alignItems: 'center', backgroundColor: FRONT_COLOUR}}>
     <Image source={require('./res/img/fflogo.png')} style={{width: 130, height: 250, marginTop: 100}} />
-    <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>要化妆就要追求完美无瑕</Text>
+    <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>完美由你掌握</Text>
     <Text style={{fontSize: 50}}> </Text>
 
     <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
@@ -308,85 +308,166 @@ const HomeScreen = ({ navigation }) => (
   </View>
 );
 
-const DetailsScreen = ({ navigation }) => (
-  <View>
-    <View >
-      <ReactNative.ScrollView style={{height: 515}}>
-        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
-          <Image source={require("./res/img/koreanmakeup.jpg")}
-        style={{width: 300, height: 300, borderRadius: Platform.OS == 'ios' ? 150 : 300}}/>
-        </View>
-        <View>
-          <Text style={{fontSize: 60, fontFamily: FONT_TO_USE, marginLeft: 20}}>Ulzzang </Text>
-        </View>
-        <View>
-          <Text style={{fontSize: 20, fontFamily: FONT_TO_USE, marginLeft: 20}}>使用产品：</Text>
-          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-            1. innisfree olive real skin (emulsion type toner)
-          </Text>
-          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-            2. dr jart + detox healing black label bb create
-          </Text>
-          <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-            3. sonia kashuk hidden agenda concealer 07
-          </Text>
-        </View>
-      </ReactNative.ScrollView>
-    </View>
-    <View style={{width: '100%'}}>
-      <Text style={{fontSize: 20,
-        color: ACCENT_COLOUR,
-        marginLeft: 20,
-        borderRadius: Platform.OS == 'ios' ? 2 : 5}}>
-         评价: </Text>
-      <Flex style={{marginLeft: 15}}>
-        <View style={{height: 20, width: 20, margin: 5,
-          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
-        <View style={{height: 20, width: 20, margin: 5,
-          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
-        <View style={{height: 20, width: 20, margin: 5,
-          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
-        <View style={{height: 20, width: 20, margin: 5,
-          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
-        <View style={{height: 20, width: 20, margin: 5,
-          borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
-        <Text style={{fontSize: 20}}>4.9</Text>
+
+class DetailsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showShoppingCart: false
+    }
+  }
+
+  toggleShoppingCart = () => {
+    this.setState((prevState) => ({
+      showShoppingCart: !prevState.showShoppingCart
+    }));
+  }
+
+  render() {
+    return (
+    <View>
+      <View >
+        <ReactNative.ScrollView style={{height: 511}}>
+          <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
+            <Image source={require("./res/img/koreanmakeup.jpg")}
+          style={{width: 300, height: 300, borderRadius: Platform.OS == 'ios' ? 150 : 300}}/>
+          </View>
+          <View>
+            <Text style={{fontSize: 60, fontFamily: FONT_TO_USE, marginLeft: 20}}>Ulzzang </Text>
+          </View>
+          <View>
+            <Text style={{fontSize: 20, fontFamily: FONT_TO_USE, marginLeft: 20}}>使用产品：</Text>
+            <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+              1. innisfree olive real skin (emulsion type toner)
+            </Text>
+            <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+              2. dr jart + detox healing black label bb create
+            </Text>
+            <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
+              3. sonia kashuk hidden agenda concealer 07
+            </Text>
+          </View>
+        </ReactNative.ScrollView>
+      </View>
+      <View style={{width: '100%'}}>
+        <Text style={{fontSize: 20,
+          color: ACCENT_COLOUR,
+          marginLeft: 20,
+          borderRadius: Platform.OS == 'ios' ? 2 : 5}}>
+           评价: </Text>
+        <Flex style={{marginLeft: 15}}>
+          <View style={{height: 20, width: 20, margin: 5,
+            borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+          <View style={{height: 20, width: 20, margin: 5,
+            borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+          <View style={{height: 20, width: 20, margin: 5,
+            borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+          <View style={{height: 20, width: 20, margin: 5,
+            borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+          <View style={{height: 20, width: 20, margin: 5,
+            borderRadius: Platform.OS == 'ios' ? 5: 5, backgroundColor: ACCENT_COLOUR}}></View>
+          <Text style={{fontSize: 20}}>4.9</Text>
+        </Flex>
+
+      </View>
+      <Flex style={{height: 40, width: '100%', backgroundColor: ACCENT_COLOUR}}>
+        <Flex.Item flex={1.5}
+            flexDirection='horizontal'
+            style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight>
+            <Image
+              source={require('./res/icons/heart.png')}
+              style={{width:30, height: 30, margin: 5}}/>
+          </TouchableHighlight>
+        </Flex.Item>
+        <Flex.Item flex={5}
+            flexDirection='horizontal'
+            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight>
+            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>加入购物车</Text>
+          </TouchableHighlight>
+        </Flex.Item>
+        <Flex.Item flex={5}
+            flexDirection='horizontal'
+            style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+          <TouchableHighlight onPress={this.toggleShoppingCart.bind(this)}>
+            <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>立即购买</Text>
+          </TouchableHighlight>
+        </Flex.Item>
       </Flex>
+      <View style={{position: 'absolute'}}>
+        <Modal
+          popup
+          animationType="slide-up"
+          maskClosable={false}
+          visible={this.state.showShoppingCart}>
+          <List renderHeader={()=>'购物单'}>
 
+              <Checkbox.CheckboxItem
+                style={{width: '100%'}}
+                checked={true}>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                    1. innisfree olive real skin (emulsion type toner)
+                  </Text>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
+                    99.09元
+                  </Text>
+              </Checkbox.CheckboxItem>
+
+              <Checkbox.CheckboxItem
+                style={{width: '100%'}}
+                checked={true}>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                    2. dr jart + detox healing black label bb create
+                  </Text>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
+                    115.00元
+                  </Text>
+              </Checkbox.CheckboxItem>
+
+              <Checkbox.CheckboxItem
+                style={{width: '100%'}}
+                checked={true}>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                    3. sonia kashuk hidden agenda concealer 07
+                  </Text>
+                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
+                    148.00元
+                  </Text>
+              </Checkbox.CheckboxItem>
+            </List>
+          <View>
+            <Text style={{marginLeft: 5, fontSize: 18, fontFamily: FONT_TO_USE}}>总数: 362.09元</Text>
+          </View>
+          <Flex>
+            <Flex.Item>
+              <Button onClick={this.toggleShoppingCart.bind(this)}
+                style={{margin: 5}} title="取消"><Text style={{color: ACCENT_COLOUR}}>取消</Text></Button>
+            </Flex.Item>
+            <Flex.Item>
+              <Button onClick={() => {
+                this.toggleShoppingCart();
+                this.props.navigation.navigate('Guides');
+                Toast.success("支付成功！", 1);
+              }}
+                style={{margin: 5, backgroundColor: ACCENT_COLOUR}} title="确认">确认</Button>
+            </Flex.Item>
+          </Flex>
+        </Modal>
+      </View>
     </View>
-    <Flex
-      style={{height: 40, width: '100%', backgroundColor: ACCENT_COLOUR}}>
-      <Flex.Item flex={1.5}
-          flexDirection='horizontal'
-          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight>
-          <Image
-            source={require('./res/icons/heart.png')}
-            style={{width:30, height: 30, margin: 5}}/>
-        </TouchableHighlight>
-      </Flex.Item>
-      <Flex.Item flex={5}
-          flexDirection='horizontal'
-          style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight>
-          <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>加入购物车</Text>
-        </TouchableHighlight>
-      </Flex.Item>
-      <Flex.Item flex={5}
-          flexDirection='horizontal'
-          style={{height: 41, justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight onPress={() => navigation.navigate('Register')}>
-          <Text style={{fontSize: 22, fontFamily: FONT_TO_USE}}>立即购买</Text>
-        </TouchableHighlight>
-      </Flex.Item>
-    </Flex>
+  )}
+}
 
+const GuidesScreen = ({ navigation }) => (
+  <View>
+    <List>
+      <List.Item>
+        <Text>Stuff</Text>
+      </List.Item>
+    </List>
   </View>
 )
-
-const submitProfile = () => {
-  Alert.alert('Submitted profile!');
-}
 
 const RootNavigator = StackNavigator({
   Home: {
@@ -415,6 +496,14 @@ const RootNavigator = StackNavigator({
     screen: DetailsScreen,
     navigationOptions: {
       headerTitle: '风格 > 韩国',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
+  Guides: {
+    screen: GuidesScreen,
+    navigationOptions: {
+      headerTitle: 'GUIDES',
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
