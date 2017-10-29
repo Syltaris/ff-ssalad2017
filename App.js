@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
 
-const FRONT_COLOUR = "#FFE8D8";
+const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
 const FONT_TO_USE = Platform.OS == 'ios' ? "Helvetica" : "sans-serif-condensed";
 const LOGO_URI = './res/img/fflogo.png';
@@ -402,42 +402,28 @@ class DetailsScreen extends React.Component {
           maskClosable={false}
           visible={this.state.showShoppingCart}>
           <List renderHeader={()=>'购物单'}>
-
-              <Checkbox.CheckboxItem
-                style={{width: '100%'}}
-                checked={true}>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                    1. innisfree olive real skin (emulsion type toner)
-                  </Text>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
-                    99.09元
-                  </Text>
-              </Checkbox.CheckboxItem>
-
-              <Checkbox.CheckboxItem
-                style={{width: '100%'}}
-                checked={true}>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                    2. dr jart + detox healing black label bb create
-                  </Text>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
-                    115.00元
-                  </Text>
-              </Checkbox.CheckboxItem>
-
-              <Checkbox.CheckboxItem
-                style={{width: '100%'}}
-                checked={true}>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                    3. sonia kashuk hidden agenda concealer 07
-                  </Text>
-                  <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
-                    148.00元
-                  </Text>
-              </Checkbox.CheckboxItem>
+            <Text style={{marginLeft: 20, fontSize: 20, fontFamily: FONT_TO_USE}}>
+              Ulzzang
+            </Text>
+            <Checkbox.CheckboxItem
+              style={{width: '100%'}}
+              checked={true}>
+                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                  1. innisfree olive real skin (emulsion type toner)
+                </Text>
+                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                  2. dr jart + detox healing black label bb create
+                </Text>
+                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
+                  3. sonia kashuk hidden agenda concealer 07
+                </Text>
+                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
+                  1积分
+                </Text>
+            </Checkbox.CheckboxItem>
             </List>
           <View>
-            <Text style={{marginLeft: 5, fontSize: 18, fontFamily: FONT_TO_USE}}>总数: 362.09元</Text>
+            <Text style={{marginLeft: 5, fontSize: 18, fontFamily: FONT_TO_USE}}>总数: 1积分</Text>
           </View>
           <Flex>
             <Flex.Item>
@@ -470,18 +456,18 @@ const GuidesScreen = ({ navigation }) => (
 )
 
 const RootNavigator = StackNavigator({
+  Login: {
+    screen: LoginScreen,
+    navigationOptions: {
+      header: null,
+    }
+  },
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       headerTitle: '风格',
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  },
-  Login: {
-    screen: LoginScreen,
-    navigationOptions: {
-      header: null,
     }
   },
   Register: {
@@ -503,7 +489,7 @@ const RootNavigator = StackNavigator({
   Guides: {
     screen: GuidesScreen,
     navigationOptions: {
-      headerTitle: 'GUIDES',
+      headerTitle: '指导书',
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
