@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform  } from 'react-native';
+import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform, ScrollView  } from 'react-native';
 import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView,
   Icon, Flex, Modal, Checkbox, Toast, Badge, Card } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
-import {Pdf} from 'react-native-pdf';
+
 
 const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
@@ -264,6 +264,48 @@ const GenerateCategoryList = (props) => {
   ))
 };
 
+const BottomNav = ({ navigation }) => (
+  <Flex
+    style={{height: 40 ,width: '100%', backgroundColor: ACCENT_COLOUR}}>
+    <Flex.Item flex={1}
+        flexDirection='horizontal'
+        style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+      <TouchableHighlight>
+        <Image
+          source={require('./res/icons/guides.png')}
+          style={{width:30, height: 30, margin: 5}}/>
+      </TouchableHighlight>
+    </Flex.Item>
+    <Flex.Item flex={1}
+        flexDirection='horizontal'
+        style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+      <TouchableHighlight>
+        <Image
+          source={require('./res/icons/orders.png')}
+          style={{width:30, height: 30, margin: 5}}/>
+      </TouchableHighlight>
+    </Flex.Item>
+    <Flex.Item flex={1}
+        flexDirection='horizontal'
+        style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+      <TouchableHighlight>
+        <Image
+          source={require('./res/icons/camera.png')}
+          style={{width:30, height: 30, margin: 5}}/>
+      </TouchableHighlight>
+    </Flex.Item>
+    <Flex.Item flex={1}
+        flexDirection='horizontal'
+        style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
+      <TouchableHighlight onPress={() => navigation.navigate('Register')}>
+        <Image
+          source={require('./res/icons/profile.png')}
+          style={{width:30, height: 30, margin: 5}}/>
+      </TouchableHighlight>
+    </Flex.Item>
+  </Flex>
+);
+
 const HomeScreen = ({ navigation }) => (
   <View style={{height: '100%'}}>
     <View flex={12}>
@@ -271,45 +313,7 @@ const HomeScreen = ({ navigation }) => (
         <GenerateCategoryList navigation={navigation}/>
       </ReactNative.ScrollView>
     </View>
-    <Flex
-      style={{height: 40 ,width: '100%', backgroundColor: ACCENT_COLOUR}}>
-      <Flex.Item flex={1}
-          flexDirection='horizontal'
-          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight>
-          <Image
-            source={require('./res/icons/guides.png')}
-            style={{width:30, height: 30, margin: 5}}/>
-        </TouchableHighlight>
-      </Flex.Item>
-      <Flex.Item flex={1}
-          flexDirection='horizontal'
-          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight>
-          <Image
-            source={require('./res/icons/orders.png')}
-            style={{width:30, height: 30, margin: 5}}/>
-        </TouchableHighlight>
-      </Flex.Item>
-      <Flex.Item flex={1}
-          flexDirection='horizontal'
-          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight>
-          <Image
-            source={require('./res/icons/camera.png')}
-            style={{width:30, height: 30, margin: 5}}/>
-        </TouchableHighlight>
-      </Flex.Item>
-      <Flex.Item flex={1}
-          flexDirection='horizontal'
-          style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-        <TouchableHighlight onPress={() => navigation.navigate('Register')}>
-          <Image
-            source={require('./res/icons/profile.png')}
-            style={{width:30, height: 30, margin: 5}}/>
-        </TouchableHighlight>
-      </Flex.Item>
-    </Flex>
+    <BottomNav navigation = {navigation}/>
   </View>
 );
 
@@ -466,7 +470,7 @@ const GenerateNewBadge = () => (
 
 const GuidesScreen = ({ navigation }) => (
   <View>
-    <List>
+    <List style={{height: 562}}>
       <Card style={{margin: 5}}>
       <List.Item>
         <Flex flexDirection="horizontal"
@@ -512,16 +516,25 @@ const GuidesScreen = ({ navigation }) => (
       </List.Item>
       </Card>
     </List>
+    <BottomNav navigation={navigation} />
   </View>
 )
 
-const ScreenPDF_002 = () => (
-  <View style={{flex: 1}}>
-      <Pdf ref={(pdf)=>{this.pdf = pdf;}}
-        source={require('./res/guides/Artboard 1.pdf')}
-        style={{flex: 1}}
-        onError={(error)=>{console.log(error);}} />
-    </View>
+const ScreenPDF_002 = ({ navigation }) => (
+  <ScrollView >
+    <Image resizeMode="contain"
+      style={{width: 400, height: 700}}
+      source={require('./res/guides/Artboard1.png')} />
+    <Image resizeMode="contain"
+      style={{width: 400, height: 700}}
+      source={require('./res/guides/Artboard3.png')} />
+    <Image resizeMode="contain"
+      style={{width: 400, height: 700}}
+      source={require('./res/guides/Artboard4.png')} />
+    <Image resizeMode="contain"
+      style={{width: 400, height: 700}}
+      source={require('./res/guides/Artboard5.png')} />
+  </ScrollView>
 );
 
 const RootNavigator = StackNavigator({
