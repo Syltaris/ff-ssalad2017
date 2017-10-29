@@ -147,11 +147,11 @@ const LoginScreen =({ navigation }) => (
     <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>完美由你掌握</Text>
     <Text style={{fontSize: 50}}> </Text>
 
-    <Button
-      title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
+    <Button style={{width: 150,}}
+      title="REGISTER" onClick={() => navigation.navigate('Register')}><Text style={{fontSize: 20}}>注册</Text></Button>
       <WhiteSpace size="lg"/>
-    <Button
-      title="REGISTER" onClick={() => navigation.navigate('Register')}>登录</Button>
+    <Button style={{width: 150}}
+      title="REGISTER" onClick={() => navigation.navigate('Register')}><Text style={{fontSize: 20}}>登录</Text></Button>
 
   </View>
 );
@@ -434,7 +434,8 @@ class DetailsScreen extends React.Component {
               <Button onClick={() => {
                 this.toggleShoppingCart();
                 this.props.navigation.navigate('Guides');
-                Toast.success("支付成功！", 1);
+                Toast.loading("正在处理...", 1);
+                setTimeout(() => Toast.success("支付成功！", 1), 1200);
               }}
                 style={{margin: 5, backgroundColor: ACCENT_COLOUR}} title="确认">确认</Button>
             </Flex.Item>
@@ -490,7 +491,7 @@ const GuidesScreen = ({ navigation }) => (
         <Flex flexDirection="horizontal"
           justify="between">
           <Flex.Item flex={1}>
-            <Image
+            <Image style={{width: 100}}
               source={require('./res/img/guides2.png')}
               style={{width: 80, height: 80, borderRadius: Platform.OS == 'ios' ? 40 : 80 }} />
           </Flex.Item>
@@ -597,7 +598,7 @@ class FacialAnalysis extends React.Component {
       showFake: false,
     }))), 4000);
 
-    setTimeout(() =>Toast.success('成功！'), 4100);
+    setTimeout(() => Toast.success('成功！'), 4100);
   }
 
   render() {
@@ -607,7 +608,7 @@ class FacialAnalysis extends React.Component {
             <Flex flex={1} flexDirection='horizontal' style={{width: '100%'}}>
               <Flex.Item flex={1}>
                 <Image source={require('./res/img/fake.png')} style={{width:100, height: 100,
-                  borderRadius: Platform.OS == 'ios' ? 50 : 100, margin: 10}}/>
+                  borderRadius: Platform.OS == 'ios' ? 50 : 100, margin: 5}}/>
               </Flex.Item>
               <Flex.Item flex={2}>
                 <Text style={{fontSize: 20}}>啊脸, 23</Text>
@@ -632,22 +633,6 @@ class FacialAnalysis extends React.Component {
 };
 
 const RootNavigator = StackNavigator({
-  FacialAnalysis: {
-    screen: FacialAnalysis,
-    navigationOptions: {
-      headerTitle: '脸部识别',
-      headerTitleStyle: {fontFamily: FONT_TO_USE},
-      headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  },
-  Camera: {
-    screen: CameraScanner,
-    navigationOptions: {
-      headerTitle: '脸部识别',
-      headerTitleStyle: {fontFamily: FONT_TO_USE},
-      headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -690,6 +675,22 @@ const RootNavigator = StackNavigator({
     screen: ScreenPDF_002,
     navigationOptions: {
       headerTitle: '指导书 > 胆大运动造型',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
+  FacialAnalysis: {
+    screen: FacialAnalysis,
+    navigationOptions: {
+      headerTitle: '脸部识别',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
+  Camera: {
+    screen: CameraScanner,
+    navigationOptions: {
+      headerTitle: '脸部识别',
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
