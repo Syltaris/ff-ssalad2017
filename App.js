@@ -270,7 +270,7 @@ const BottomNav = ({ navigation }) => (
     <Flex.Item flex={1}
         flexDirection='horizontal'
         style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-      <TouchableHighlight>
+      <TouchableHighlight onPress={() => navigation.navigate('Guides')}>
         <Image
           source={require('./res/icons/guides.png')}
           style={{width:30, height: 30, margin: 5}}/>
@@ -279,7 +279,7 @@ const BottomNav = ({ navigation }) => (
     <Flex.Item flex={1}
         flexDirection='horizontal'
         style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-      <TouchableHighlight>
+      <TouchableHighlight >
         <Image
           source={require('./res/icons/orders.png')}
           style={{width:30, height: 30, margin: 5}}/>
@@ -288,7 +288,7 @@ const BottomNav = ({ navigation }) => (
     <Flex.Item flex={1}
         flexDirection='horizontal'
         style={{justifyContent: 'center', alignItems: 'center', borderWidth: 1}}>
-      <TouchableHighlight>
+      <TouchableHighlight onPress={() => navigation.navigate('Camera')}>
         <Image
           source={require('./res/icons/camera.png')}
           style={{width:30, height: 30, margin: 5}}/>
@@ -537,15 +537,13 @@ const ScreenPDF_002 = ({ navigation }) => (
   </ScrollView>
 );
 
+const CameraScanner = () => (
+  <View>
+    <Text>Hope</Text>
+  </View>
+);
+
 const RootNavigator = StackNavigator({
-  Guides: {
-    screen: GuidesScreen,
-    navigationOptions: {
-      headerTitle: '指导书',
-      headerTitleStyle: {fontFamily: FONT_TO_USE},
-      headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -576,10 +574,25 @@ const RootNavigator = StackNavigator({
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
   },
+  Guides: {
+    screen: GuidesScreen,
+    navigationOptions: {
+      headerTitle: '指导书',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
   Guides002: {
     screen: ScreenPDF_002,
     navigationOptions: {
       headerTitle: '指导书 > 胆大运动造型',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  }, Camera: {
+    screen: CameraScanner,
+    navigationOptions: {
+      headerTitle: '脸部识别',
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
