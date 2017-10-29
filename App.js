@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform  } from 'react-native';
-import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView, Icon, Flex, Modal, Checkbox, Toast } from 'antd-mobile';
+import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView,
+  Icon, Flex, Modal, Checkbox, Toast, Badge } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
@@ -146,6 +147,9 @@ const LoginScreen =({ navigation }) => (
     <Text style={{fontSize: 50}}> </Text>
 
     <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
+      <WhiteSpace size="lg"/>
+    <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>登陆</Button>
+
   </View>
 );
 
@@ -445,17 +449,51 @@ class DetailsScreen extends React.Component {
   )}
 }
 
+const GenerateNewBadge = () => (
+  (Platform.OS == 'ios' ?
+    (<Badge text="新！"
+      style={{
+        borderRadius: 2}}/>) :
+    (<Badge text="新！"
+      corner
+      style={{width: 50,
+        height: 80,
+        borderRadius: 2}}/>))
+);
+
 const GuidesScreen = ({ navigation }) => (
   <View>
     <List>
       <List.Item>
-        <Text>Stuff</Text>
+        <Flex flexDirection="horizontal"
+          justify="between">
+          <Flex.Item flex={1}>
+            <Image
+              source={require('./res/img/koreanmakeup.jpg')}
+              style={{width: 80, height: 80, borderRadius: Platform.OS == 'ios' ? 40 : 80 }} />
+          </Flex.Item>
+          <Flex.Item flex={2}>
+            <Text style={{fontSize: 18}}>Ulzzang 指导书</Text>
+            <Text style={{fontSize: 15, color: "#8E8E8E"}}></Text>
+          </Flex.Item>
+          <Flex.Item flex={1}>
+            <GenerateNewBadge />
+          </Flex.Item>
+        </Flex>
       </List.Item>
     </List>
   </View>
 )
 
 const RootNavigator = StackNavigator({
+  Guides: {
+    screen: GuidesScreen,
+    navigationOptions: {
+      headerTitle: '指导书',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -486,14 +524,7 @@ const RootNavigator = StackNavigator({
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
   },
-  Guides: {
-    screen: GuidesScreen,
-    navigationOptions: {
-      headerTitle: '指导书',
-      headerTitleStyle: {fontFamily: FONT_TO_USE},
-      headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  }
+
 });
 
 export default RootNavigator;
