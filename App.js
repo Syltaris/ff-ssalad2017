@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform  } from 'react-native';
 import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView,
-  Icon, Flex, Modal, Checkbox, Toast, Badge } from 'antd-mobile';
+  Icon, Flex, Modal, Checkbox, Toast, Badge, Card } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import {CameraKitCamera} from 'react-native-camera-kit';
+import {Pdf} from 'react-native-pdf';
 
 const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
@@ -342,13 +343,13 @@ class DetailsScreen extends React.Component {
           <View>
             <Text style={{fontSize: 20, fontFamily: FONT_TO_USE, marginLeft: 20}}>使用产品：</Text>
             <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-              1. innisfree olive real skin (emulsion type toner)
+              1. FF fresh and flawless primer
             </Text>
             <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-              2. dr jart + detox healing black label bb create
+              2. FF spot concealer E03
             </Text>
             <Text style={{fontSize: 18, fontFamily: FONT_TO_USE, marginLeft: 22}}>
-              3. sonia kashuk hidden agenda concealer 07
+              3. FF crimson lip stain
             </Text>
           </View>
         </ReactNative.ScrollView>
@@ -413,13 +414,13 @@ class DetailsScreen extends React.Component {
               style={{width: '100%'}}
               checked={true}>
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                  1. innisfree olive real skin (emulsion type toner)
+                  1. FF fresh and flawless primer
                 </Text>
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                  2. dr jart + detox healing black label bb create
+                  2. FF spot concealer E03
                 </Text>
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
-                  3. sonia kashuk hidden agenda concealer 07
+                  3. FF crimson lip stain
                 </Text>
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
                   1积分
@@ -453,10 +454,12 @@ const GenerateNewBadge = () => (
   (Platform.OS == 'ios' ?
     (<Badge text="新！"
       style={{
+        marginLeft: 50,
         borderRadius: 2}}/>) :
     (<Badge text="新！"
       corner
-      style={{width: 50,
+      style={{marginLeft: 40,
+        width: 50,
         height: 80,
         borderRadius: 2}}/>))
 );
@@ -464,6 +467,7 @@ const GenerateNewBadge = () => (
 const GuidesScreen = ({ navigation }) => (
   <View>
     <List>
+      <Card style={{margin: 5}}>
       <List.Item>
         <Flex flexDirection="horizontal"
           justify="between">
@@ -473,17 +477,52 @@ const GuidesScreen = ({ navigation }) => (
               style={{width: 80, height: 80, borderRadius: Platform.OS == 'ios' ? 40 : 80 }} />
           </Flex.Item>
           <Flex.Item flex={2}>
-            <Text style={{fontSize: 18}}>Ulzzang 指导书</Text>
-            <Text style={{fontSize: 15, color: "#8E8E8E"}}></Text>
+            <TouchableHighlight>
+              <View>
+                <Text style={{fontSize: 18}}>Ulzzang 指导书</Text>
+                <Text style={{fontSize: 15, color: "#8E8E8E"}}>首先，将化妆淡点在脸上，然后用手涂抹均匀...</Text>
+              </View>
+          </TouchableHighlight>
           </Flex.Item>
           <Flex.Item flex={1}>
             <GenerateNewBadge />
           </Flex.Item>
         </Flex>
       </List.Item>
+      </Card>
+      <Card style={{margin: 5}}>
+      <List.Item>
+        <Flex flexDirection="horizontal"
+          justify="between">
+          <Flex.Item flex={1}>
+            <Image
+              source={require('./res/img/guides2.png')}
+              style={{width: 80, height: 80, borderRadius: Platform.OS == 'ios' ? 40 : 80 }} />
+          </Flex.Item>
+          <Flex.Item flex={3}>
+            <TouchableHighlight
+              onPress={() => navigation.navigate('Guides002')}>
+              <View>
+                <Text style={{fontSize: 18}}>胆大运动造型 指导书</Text>
+                <Text style={{fontSize: 15, color: "#8E8E8E"}}>使用扫描或拍摄动作在眉头上施加hirage色的眼影...</Text>
+              </View>
+          </TouchableHighlight>
+          </Flex.Item>
+        </Flex>
+      </List.Item>
+      </Card>
     </List>
   </View>
 )
+
+const ScreenPDF_002 = () => (
+  <View style={{flex: 1}}>
+      <Pdf ref={(pdf)=>{this.pdf = pdf;}}
+        source={require('./res/guides/Artboard 1.pdf')}
+        style={{flex: 1}}
+        onError={(error)=>{console.log(error);}} />
+    </View>
+);
 
 const RootNavigator = StackNavigator({
   Guides: {
@@ -524,6 +563,14 @@ const RootNavigator = StackNavigator({
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
   },
+  Guides002: {
+    screen: ScreenPDF_002,
+    navigationOptions: {
+      headerTitle: '指导书 > 胆大运动造型',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  }
 
 });
 
