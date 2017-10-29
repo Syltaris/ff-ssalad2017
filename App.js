@@ -7,7 +7,6 @@ import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 
-
 const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
 const FONT_TO_USE = Platform.OS == 'ios' ? "Helvetica" : "sans-serif-condensed";
@@ -68,7 +67,7 @@ const mainMenu_headers = [{
       },
     ]
   }, {
-    header: '艺人方庄',
+    header: '艺人仿妆',
     data: [{
         text: <Text style={{float: 'center'}}>王霏霏</Text>,
         icon: <Image source={require("./res/img/wff.jpeg")} style={{width: ICON_WIDTH, height: ICON_HEIGHT}} />
@@ -148,9 +147,11 @@ const LoginScreen =({ navigation }) => (
     <Text style={{fontSize: 50, fontFamily: FONT_TO_USE}}>完美由你掌握</Text>
     <Text style={{fontSize: 50}}> </Text>
 
-    <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
+    <Button
+      title="REGISTER" onClick={() => navigation.navigate('Register')}>注册</Button>
       <WhiteSpace size="lg"/>
-    <Button title="REGISTER" onClick={() => navigation.navigate('Register')}>登陆</Button>
+    <Button
+      title="REGISTER" onClick={() => navigation.navigate('Register')}>登录</Button>
 
   </View>
 );
@@ -188,8 +189,8 @@ class RegistrationForm extends React.Component {
           </InputItem>
           <InputItem
             clear
-            value="F"
-            placeholder="F">
+            value="女"
+            placeholder="性别？">
             性别
           </InputItem>
         </List>
@@ -528,29 +529,31 @@ const ScreenPDF_002 = ({ navigation }) => (
 );
 
 class CameraScanner extends React.Component {
-
-  getSelectedImages(props) {
-    Alert.alert("done..");
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: [],
+      images: [],
+    };
   }
 
-  selectPhoto() {
-    if(Platform.OS == 'ios') {
-      return (
-        <CameraRollPicker
-          callback={this.getSelectedImages} />
-      );
-    } else {
-      // Alert.alert("You're using an Android dev...");
-      return (<CameraRollPicker
-        callback={this.getSelectedImages} />);
-    }
+  getSelectedImages(images, current) {
+    var num = images.length;
+
+    this.setState({
+      num: num,
+      selected: images,
+    });
+
+    this.props.navigation.navigate('FacialAnalysis');
+    Toast.loading('正在处理', 3);
   }
 
   render() {
     return (
       <View>
         <View style={{alignItems: 'center', margin: 40}}>
-          <TouchableHighlight
+          {/* <TouchableHighlight
             onPress={this.selectPhoto.bind(this)}
             style={{ width: 250, height: 250 }}>
             <Image
@@ -559,17 +562,92 @@ class CameraScanner extends React.Component {
               borderColor: ACCENT_COLOUR,
               borderRadius: Platform.OS == 'ios' ? 120 :  250 }}
               source={require('./res/img/profile_default.jpg')}/>
-          </TouchableHighlight>
+          </TouchableHighlight> */}
 
           <CameraRollPicker
-              callback={this.getSelectedImages} />
+            navigation={this.props.navigation}
+            scrollRenderAheadDistance={500}
+            initialListSize={1}
+            pageSize={3}
+            removeClippedSubviews={false}
+            groupTypes='SavedPhotos'
+            batchSize={5}
+            maximum={3}
+            selected={this.state.selected}
+            assetType='Photos'
+            imagesPerRow={3}
+            imageMargin={5}
+            callback={this.getSelectedImages.bind(this)} />
         </View>
       </View>
     );
   }
 };
 
+class FacialAnalysis extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showFake: true
+    };
+  }
+
+  componentDidMount() {
+    setTimeout( () => (this.setState((prevState) => ({
+      showFake: false,
+    }))), 4000);
+
+    setTimeout(() =>Toast.success('成功！'), 4100);
+  }
+
+  render() {
+    return (
+      <View style={{height: 1010}}>
+          <View style={{backgroundColor: "#8E8E8E", borderWidth: 2}}>
+            <Flex flex={1} flexDirection='horizontal' style={{width: '100%'}}>
+              <Flex.Item flex={1}>
+                <Image source={require('./res/img/fake.png')} style={{width:100, height: 100,
+                  borderRadius: Platform.OS == 'ios' ? 50 : 100, margin: 10}}/>
+              </Flex.Item>
+              <Flex.Item flex={2}>
+                <Text style={{fontSize: 20}}>啊脸, 23</Text>
+                <WhiteSpace/>
+                <Text style={{fontSize: 20}}>上海市静安区</Text>
+                <Text style={{fontSize: 20}}>四行仓库创意科技园2楼</Text>
+              </Flex.Item>
+            </Flex>
+          </View>
+          <View flex={1} style={{justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontSize: 20, marginLeft:10}}>点击脸部部位获取分析:</Text>
+            {this.state.showFake ? <Image source={require('./res/img/fake.png')} style={{width:350, height: 350,
+               margin: 20}}/> : <Image source={require('./res/img/faker.png')} style={{width:350, height: 350,
+               margin: 20}}/>}
+          </View>
+          <View flex={1}>
+            <BottomNav navigation={this.props.navigation} />
+          </View>
+      </View>
+    )
+  }
+};
+
 const RootNavigator = StackNavigator({
+  FacialAnalysis: {
+    screen: FacialAnalysis,
+    navigationOptions: {
+      headerTitle: '脸部识别',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
+  Camera: {
+    screen: CameraScanner,
+    navigationOptions: {
+      headerTitle: '脸部识别',
+      headerTitleStyle: {fontFamily: FONT_TO_USE},
+      headerStyle: {backgroundColor: ACCENT_COLOUR},
+    }
+  },
   Login: {
     screen: LoginScreen,
     navigationOptions: {
@@ -615,15 +693,7 @@ const RootNavigator = StackNavigator({
       headerTitleStyle: {fontFamily: FONT_TO_USE},
       headerStyle: {backgroundColor: ACCENT_COLOUR},
     }
-  }, Camera: {
-    screen: CameraScanner,
-    navigationOptions: {
-      headerTitle: '脸部识别',
-      headerTitleStyle: {fontFamily: FONT_TO_USE},
-      headerStyle: {backgroundColor: ACCENT_COLOUR},
-    }
-  }
-
+  },
 });
 
 export default RootNavigator;
