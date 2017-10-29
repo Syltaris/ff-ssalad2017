@@ -4,8 +4,7 @@ import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView,
   Icon, Flex, Modal, Checkbox, Toast, Badge, Card } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
-import {CameraKitCamera} from 'react-native-camera-kit';
-
+import Camera from 'react-native-camera';
 
 const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
@@ -410,12 +409,19 @@ class DetailsScreen extends React.Component {
           animationType="slide-up"
           maskClosable={false}
           visible={this.state.showShoppingCart}>
-          <List renderHeader={()=>'购物单'}>
-            <Text style={{marginLeft: 20, fontSize: 20, fontFamily: FONT_TO_USE}}>
-              Ulzzang
+          <List renderHeader={()=>'确认订单'}>
+            <View style={{backgroundColor: "#EEEEEE", padding: 5}}>
+              <Text style={{fontSize: 16, marginLeft: 10}}>收件人： 啊脸</Text>
+              <Text style={{fontSize: 16, marginLeft: 10}}>上海市静安区</Text>
+              <Text style={{fontSize: 16, marginLeft: 10}}>四行仓库创意科技园2楼</Text>
+              <WhiteSpace />
+              <Text style={{fontSize: 16, marginLeft: 10}}>订单将于星期三 2017年11月1日送到</Text>
+            </View>
+            <Text style={{marginLeft: 20, marginTop: 10, fontSize: 20, fontFamily: FONT_TO_USE}}>
+              1: Ulzzang
             </Text>
             <Checkbox.CheckboxItem
-              style={{width: '100%'}}
+              style={{width: '100%', padding: 5}}
               checked={true}>
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
                   1. FF fresh and flawless primer
@@ -426,13 +432,14 @@ class DetailsScreen extends React.Component {
                 <Text style={{fontSize: 15, fontFamily: FONT_TO_USE}}>
                   3. FF crimson lip stain
                 </Text>
-                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E'}}>
-                  1积分
+                <Text style={{fontSize: 15, fontFamily: FONT_TO_USE, color: '#8E8E8E', marginTop: 5}}>
+                  小计： 1积分
                 </Text>
             </Checkbox.CheckboxItem>
             </List>
           <View>
-            <Text style={{marginLeft: 5, fontSize: 18, fontFamily: FONT_TO_USE}}>总数: 1积分</Text>
+            <Text style={{textAlign: 'right', marginRight: 5,
+              fontSize: 18, fontFamily: FONT_TO_USE}}>总数: 1积分</Text>
           </View>
           <Flex>
             <Flex.Item>
