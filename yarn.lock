@@ -4788,7 +4788,7 @@ react-native-camera-kit@^5.3.11:
     lodash "^4.14.2"
     prop-types "^15.5.10"
 
-react-native-camera-roll-picker@^1.2.1:
+react-native-camera-roll-picker@^1.2.1, react-native-camera-roll-picker@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-camera-roll-picker/-/react-native-camera-roll-picker-1.2.3.tgz#b117fd3a2b9012dcccee1261a9bc427226b8d6d2"
 

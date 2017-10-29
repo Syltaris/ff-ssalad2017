@@ -1,10 +1,12 @@
 import React from 'react';
-import ReactNative, { StyleSheet, Text, View, Alert, Image, TouchableHighlight, Platform, ScrollView  } from 'react-native';
+import ReactNative, { StyleSheet, Text, View, Alert, Image,
+  TouchableHighlight, Platform, ScrollView, ImagePickerIOS  } from 'react-native';
 import { Button, List, InputItem, WhiteSpace, ImagePicker, Grid, ListView,
   Icon, Flex, Modal, Checkbox, Toast, Badge, Card } from 'antd-mobile';
 import { StackNavigator } from 'react-navigation';
 import { createForm } from 'rc-form';
-import Camera from 'react-native-camera';
+import CameraRollPicker from 'react-native-camera-roll-picker';
+
 
 const FRONT_COLOUR = "#EFEFEF";
 const ACCENT_COLOUR = "#DB2981";
@@ -154,24 +156,6 @@ const LoginScreen =({ navigation }) => (
 );
 
 class RegistrationForm extends React.Component {
-  openCamera() {
-    return (
-      <CameraKitCamera
-        ref={cam => this.camera = cam}
-        style={{
-          flex: 1,
-          backgroundColor: 'white'
-        }}
-        cameraOptions={{
-          flashMode: 'auto',             // on/off/auto(default)
-          focusMode: 'on',               // off/on(default)
-          zoomMode: 'on',                // off/on(default)
-          ratioOverlay:'1:1',            // optional, ratio overlay on the camera and crop the image seamlessly
-          ratioOverlayColor: '#00000077' // optional
-        }}
-        onReadQRCode={(event) => console.log(event.nativeEvent.qrcodeStringValue)} // optional
-    />);
-  }
 
   render() {
     const { getFieldProps } = this.props.form;
@@ -180,7 +164,6 @@ class RegistrationForm extends React.Component {
       <View >
         <View style={{alignItems: 'center', margin: 40}}>
           <TouchableHighlight
-            onPress={this.openCamera.bind(this)}
             style={{ width: 250, height: 250 }}>
             <Image
               style={{ width: '95%', height: '95%',
@@ -544,11 +527,47 @@ const ScreenPDF_002 = ({ navigation }) => (
   </ScrollView>
 );
 
-const CameraScanner = () => (
-  <View>
-    <Text>Hope</Text>
-  </View>
-);
+class CameraScanner extends React.Component {
+
+  getSelectedImages(props) {
+    Alert.alert("done..");
+  }
+
+  selectPhoto() {
+    if(Platform.OS == 'ios') {
+      return (
+        <CameraRollPicker
+          callback={this.getSelectedImages} />
+      );
+    } else {
+      // Alert.alert("You're using an Android dev...");
+      return (<CameraRollPicker
+        callback={this.getSelectedImages} />);
+    }
+  }
+
+  render() {
+    return (
+      <View>
+        <View style={{alignItems: 'center', margin: 40}}>
+          <TouchableHighlight
+            onPress={this.selectPhoto.bind(this)}
+            style={{ width: 250, height: 250 }}>
+            <Image
+              style={{ width: '95%', height: '95%',
+              borderWidth:5,
+              borderColor: ACCENT_COLOUR,
+              borderRadius: Platform.OS == 'ios' ? 120 :  250 }}
+              source={require('./res/img/profile_default.jpg')}/>
+          </TouchableHighlight>
+
+          <CameraRollPicker
+              callback={this.getSelectedImages} />
+        </View>
+      </View>
+    );
+  }
+};
 
 const RootNavigator = StackNavigator({
   Login: {
