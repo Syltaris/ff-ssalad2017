@@ -538,14 +538,7 @@ class CameraScanner extends React.Component {
     };
   }
 
-  getSelectedImages(images, current) {
-    var num = images.length;
-
-    this.setState({
-      num: num,
-      selected: images,
-    });
-
+  getSelectedImages() {
     this.props.navigation.navigate('FacialAnalysis');
     Toast.loading('正在处理', 3);
   }
@@ -553,30 +546,19 @@ class CameraScanner extends React.Component {
   render() {
     return (
       <View>
-        <View style={{alignItems: 'center', margin: 40}}>
-          {/* <TouchableHighlight
-            onPress={this.selectPhoto.bind(this)}
-            style={{ width: 250, height: 250 }}>
-            <Image
-              style={{ width: '95%', height: '95%',
-              borderWidth:5,
-              borderColor: ACCENT_COLOUR,
-              borderRadius: Platform.OS == 'ios' ? 120 :  250 }}
-              source={require('./res/img/profile_default.jpg')}/>
-          </TouchableHighlight> */}
-
+        <View style={{alignItems: 'center', margin: 20}}>
+          <Text style={{fontSize: 30, margin: 10}}>请选择照片：</Text>
           <CameraRollPicker
-            navigation={this.props.navigation}
-            scrollRenderAheadDistance={500}
+            scrollRenderAheadDistance={50}
             initialListSize={1}
-            pageSize={3}
+            pageSize={1}
             removeClippedSubviews={false}
             groupTypes='SavedPhotos'
-            batchSize={5}
-            maximum={3}
+            batchSize={50}
+            maximum={2}
             selected={this.state.selected}
             assetType='Photos'
-            imagesPerRow={3}
+            imagesPerRow={1}
             imageMargin={5}
             callback={this.getSelectedImages.bind(this)} />
         </View>
