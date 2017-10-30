@@ -578,9 +578,9 @@ class FacialAnalysis extends React.Component {
   componentDidMount() {
     setTimeout( () => (this.setState((prevState) => ({
       showFake: false,
-    }))), 4000);
+    }))), 3500);
 
-    setTimeout(() => Toast.success('成功！'), 4100);
+    setTimeout(() => Toast.success('成功！'), 3700);
   }
 
   render() {

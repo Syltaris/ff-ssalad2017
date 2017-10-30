@@ -1,5 +1,9 @@
 {
   "expo": {
+	"name": "FF",
+	"description": "Demo for 11th Startup Salad at Shanghai",
+	"slug": "ff",
+	"icon": "./logo.png",
     "sdkVersion": "22.0.0"
   }
 }

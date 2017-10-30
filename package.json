@@ -1,6 +1,6 @@
 {
-  "name": "salad2",
-  "version": "0.1.0",
+  "name": "FF",
+  "version": "0.1.0-alpha",
   "private": true,
   "devDependencies": {
     "babel-plugin-import": "^1.6.2",
